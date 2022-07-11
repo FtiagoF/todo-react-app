@@ -1,0 +1,31 @@
+.newtasks {
+    display: flex;
+    gap: 8px;
+    height: 3.375rem;
+    justify-content: space-between;
+    margin-top: calc((3.375rem/2)*-1);
+    margin-bottom: 4rem;
+}
+
+.newtasks input {
+    background-color: var(--gray-500);
+    border: 1px solid var(--gray-700);
+    color: var(--gray-300);
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.newtasks button {
+    padding: 1rem;
+    background-color: var(--blue);
+    color: var(--gray-100);
+    border-radius: 8px;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
