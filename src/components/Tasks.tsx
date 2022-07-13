@@ -1,4 +1,5 @@
 import { ClipboardText } from 'phosphor-react'
+import { Task } from './Task'
 import styles from './Tasks.module.css'
 
 export function Tasks() {
@@ -8,7 +9,7 @@ export function Tasks() {
                 <b>Tarefas criadas <span>0</span></b>
                 <b>Tarefas concluidas <span>0</span></b>
             </header>
-            <div className={styles.empty}>
+            <div className={styles.content}>
                 <div className={styles.emptyBox}>
                     <div className={styles.emptyIcon}>
                         <ClipboardText size={56} />
@@ -18,7 +19,11 @@ export function Tasks() {
                         Crie tarefas e organize seus itens a fazer</p>
                     </div>
                 </div>
+                <div className={styles.taskList}>
+                    <Task />
+                </div>
             </div>
+            
         </div>
     )
 }
