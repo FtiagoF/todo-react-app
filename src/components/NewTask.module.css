@@ -18,8 +18,8 @@
 
 .newtasks button {
     padding: 1rem;
-    background-color: var(--blue);
     color: var(--gray-100);
+    background: var(--blue-dark);
     border-radius: 8px;
     border: none;
     font-size: 0.875rem;
@@ -28,4 +28,10 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    transition: background 0.5s;
+}
+
+.newtasks button:hover {
+    cursor: pointer;
+    background: var(--blue);
 }

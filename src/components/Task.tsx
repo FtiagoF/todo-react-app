@@ -1,7 +1,17 @@
 import { Trash } from 'phosphor-react'
 import styles from './Task.module.css'
+import { TaskProps } from '../interfaces/Task'
 
-export function Task() {
+interface DeleteTaskProps extends TaskProps {
+    onDeleteTask: (description: string) => void
+}
+
+export function Task({done, description, onDeleteTask}: DeleteTaskProps) {
+    function handleDeleteTask() {
+        onDeleteTask(description);
+        
+    }
+
     return(
         <div className={styles.task}>
             <div className={styles.taskDescription}>
@@ -9,10 +19,10 @@ export function Task() {
                     <input type="checkbox" className={styles.checkRound} id="checkbox"/>
                     <label htmlFor="checkbox"></label>
                 </div>
-                <p>Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.</p>
+                <p>{description}</p>
             </div>
-            <button>
-                <Trash size={32} />
+            <button onClick={handleDeleteTask}>
+                <Trash size={24} />
             </button>
         </div>
     )
