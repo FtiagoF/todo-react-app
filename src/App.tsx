@@ -8,9 +8,19 @@ import { useEffect, useState } from 'react';
 import { TaskProps } from './interfaces/Task';
 
 export function App() {
-  const [newTask, setNewTask] = useState<TaskProps|{}>({})
-  function sendTaskToTaskList(task: TaskProps){
-    setNewTask(task);
+  const [TaskList, setTaskList] = useState<TaskProps[]>([])
+
+  function updateTaskList(newTaskList: TaskProps[]){
+    setTaskList(newTaskList);
+  }
+
+  function createTask(task: TaskProps) {
+    updateTaskList([...TaskList, task])
+  }
+
+  function deleteTask(taskToDelete: string) {
+    const TasksWithoutDeletedOne = TaskList.filter(task => {return task.description != taskToDelete});
+    setTaskList(TasksWithoutDeletedOne);
   }
 
   return (
@@ -18,8 +28,10 @@ export function App() {
       <Header />
       <div className={styles.wrapper}>
         <main>
-          <NewTask onCreateTask={sendTaskToTaskList}/>
-          <Tasks newTask={newTask}/> 
+          <NewTask onCreateTask={createTask}/>
+          <Tasks 
+          tasks={TaskList}
+          onDeleteTask={deleteTask}/> 
         </main>
       </div>
     </>

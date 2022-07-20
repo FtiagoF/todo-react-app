@@ -5,15 +5,13 @@ import { Task } from './Task'
 import styles from './Tasks.module.css'
 
 interface TaskListProps {
-    newTask?: TaskProps|{}
+    tasks: TaskProps[]
+    onDeleteTask: (task: string) => void;
 }
 
-export function Tasks({newTask}: TaskListProps) {    
-    const [tasksList, setTasksList] = useState<TaskProps[]>([])
-    
+export function Tasks({tasks, onDeleteTask}: TaskListProps) {    
     function deleteTask(taskToDelete: string) {
-        const TasksWithoutDeletedOne = tasksList.filter(task => {return task.description != taskToDelete});
-        setTasksList(TasksWithoutDeletedOne);
+        onDeleteTask(taskToDelete);
     }
     
     return(
@@ -23,7 +21,7 @@ export function Tasks({newTask}: TaskListProps) {
                 <b>Tarefas concluidas <span>0</span></b>
             </header>
             <div className={styles.content}>
-                {!tasksList.length ? (<div className={styles.emptyBox}>
+                {!tasks.length ? (<div className={styles.emptyBox}>
                     <div className={styles.emptyIcon}>
                         <ClipboardText size={56} />
                     </div>
@@ -32,9 +30,9 @@ export function Tasks({newTask}: TaskListProps) {
                         Crie tarefas e organize seus itens a fazer</p>
                     </div>
                 </div>) : null}
-                {tasksList.length ? (
+                {tasks.length ? (
                     <div className={styles.taskList}>
-                    {tasksList.map(task => {
+                    {tasks.map(task => {
                         return(<Task 
                             key={task.description}
                             done={task.done}

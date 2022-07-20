@@ -4,7 +4,7 @@ import { TaskProps } from '../interfaces/Task';
 import styles from './NewTask.module.css'
 
 interface NewTaskProps {
-    onCreateTask: (task:TaskProps) => void;
+    onCreateTask: (tasks:TaskProps) => void;
 }
 
 export function NewTask({onCreateTask}:NewTaskProps) {
@@ -12,7 +12,7 @@ export function NewTask({onCreateTask}:NewTaskProps) {
 
     function handleCreateNewTask(event: FormEvent) {
         event.preventDefault();
-        onCreateTask?.({done: false, description: newTaskText})
+        onCreateTask({done: false, description: newTaskText})
         setNewTaskText('')
     }
 
