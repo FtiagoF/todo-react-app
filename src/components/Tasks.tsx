@@ -4,18 +4,18 @@ import { TaskProps } from '../interfaces/Task'
 import { Task } from './Task'
 import styles from './Tasks.module.css'
 
-interface taskListProps {
-    taskList: TaskProps[];
-    onRemoveTask: (taskList: TaskProps[]) => void;
+interface TaskListProps {
+    newTask?: TaskProps|{}
 }
 
-export function Tasks({taskList, onRemoveTask}:taskListProps) {
-    console.log(taskList);
+export function Tasks({newTask}: TaskListProps) {    
+    const [tasksList, setTasksList] = useState<TaskProps[]>([])
     
     function deleteTask(taskToDelete: string) {
-        const TasksWithoutDeletedOne = taskList.filter(task => {return task.description != taskToDelete});
-        onRemoveTask(TasksWithoutDeletedOne);
+        const TasksWithoutDeletedOne = tasksList.filter(task => {return task.description != taskToDelete});
+        setTasksList(TasksWithoutDeletedOne);
     }
+    
     return(
         <div className={styles.tasks}>
             <header className={styles.header}>
@@ -23,7 +23,7 @@ export function Tasks({taskList, onRemoveTask}:taskListProps) {
                 <b>Tarefas concluidas <span>0</span></b>
             </header>
             <div className={styles.content}>
-                {!taskList.length ? (<div className={styles.emptyBox}>
+                {!tasksList.length ? (<div className={styles.emptyBox}>
                     <div className={styles.emptyIcon}>
                         <ClipboardText size={56} />
                     </div>
@@ -32,9 +32,9 @@ export function Tasks({taskList, onRemoveTask}:taskListProps) {
                         Crie tarefas e organize seus itens a fazer</p>
                     </div>
                 </div>) : null}
-                {taskList.length ? (
+                {tasksList.length ? (
                     <div className={styles.taskList}>
-                    {taskList.map(task => {
+                    {tasksList.map(task => {
                         return(<Task 
                             key={task.description}
                             done={task.done}
